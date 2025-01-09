@@ -1,0 +1,50 @@
+#include "MyActor1.h"
+#include "Math/UnrealMathUtility.h"
+
+// Sets default values
+AMyActor1::AMyActor1()
+{
+	// Set this actor to call Tick() every frame. You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = false; 
+}
+
+// Called when the game starts or when spawned
+void AMyActor1::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Move(); 
+}
+
+
+int AMyActor1::Step()
+{
+	return FMath::RandRange(0, 1);
+}
+
+
+void AMyActor1::Move()
+{
+	int X = 0; 
+	int Y = 0; 
+
+	UE_LOG(LogTemp, Warning, TEXT("시작 좌표: (%d, %d)"), X, Y);
+
+
+	for (int i = 0; i < 10; ++i)
+	{
+		int StepX = Step(); 
+		int StepY = Step(); 
+
+		X += StepX; 
+		Y += StepY; 
+
+		UE_LOG(LogTemp, Warning, TEXT("스텝 %d: 이동 거리 (StepX: %d, StepY: %d), 현재 좌표: (%d, %d)"), i + 1, StepX, StepY, X, Y);
+	}
+}
+
+// Called every frame
+void AMyActor1::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
